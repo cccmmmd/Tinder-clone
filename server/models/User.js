@@ -51,7 +51,7 @@ const userSchema = new mongoose.Schema(
             },
         ],
     },
-
+    { timestamps: true }
 );
 
 //密碼加密存資料庫

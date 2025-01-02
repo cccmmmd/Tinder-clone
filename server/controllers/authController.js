@@ -55,7 +55,8 @@ export const signup = async(req, res) => {
 		});
 
     } catch(err){
-        console.log(error);
+        console.log(err);
+		
 		res.status(500).json({ success: false, message: "Server error" });
     }
 
@@ -94,7 +95,8 @@ export const login = async(req, res) => {
 		});
 
     } catch(err){
-        console.log(error);
+        console.log(err);
+
 		res.status(500).json({ success: false, message: "Server error" });
     }
 

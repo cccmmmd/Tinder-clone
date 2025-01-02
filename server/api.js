@@ -22,6 +22,6 @@ app.use("/api/,matches", matchRoutes);
 app.use("/api/message", messageRoutes);
 
 app.listen(PORT, () => {
-    console.log("Server started at :" + PORT);
-    connectDB
+    console.log("Server started at : " + PORT);
+    connectDB();
 });

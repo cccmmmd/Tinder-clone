@@ -26,8 +26,8 @@ export const protectRoute = async (req, res, next) => {
 		req.user = currentUser;
 
         next();
-    } catch (err){
-        console.log(error);
+    } catch(err){
+        console.log(err);
        
         if (error instanceof jwt.JsonWebTokenError) {
 			return res.status(401).json({
