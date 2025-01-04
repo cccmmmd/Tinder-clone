@@ -64,7 +64,7 @@ export const likeUser = async (req, res) => {
 			user: currentUser,
 		});
 
-    } catch(err) {
+    } catch (err) {
         console.log(err);
 
 		res.status(500).json({
@@ -97,7 +97,7 @@ export const dislikeUser = async (req, res) => {
 			user: currentUser,
 		});
 
-    } catch(err) {
+    } catch (err) {
         console.log(err);
 
 		res.status(500).json({
@@ -115,7 +115,7 @@ export const getMatches = async (req, res) => {
 			success: true,
 			matches: user.matches,
 		});
-    } catch(err){
+    } catch (err){
         console.log(err);
 
 		res.status(500).json({

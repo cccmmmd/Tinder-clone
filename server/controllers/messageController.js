@@ -13,7 +13,7 @@ export const sendMessage = async (req, res) => {
 			success: true,
 			message: newMessage,
 		});
-    } catch(err){
+    } catch (err){
         console.log(err);
 		res.status(500).json({
 			success: false,
@@ -32,7 +32,7 @@ export const getConversation = async (req, res) => {
 			],
 		}).sort("createdAt");
 
-    }catch(err){
+    }catch (err){
         console.log(err);
 
 

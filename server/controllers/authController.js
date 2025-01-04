@@ -32,6 +32,14 @@ export const signup = async(req, res) => {
 			});
 		}
 
+		const existingUser = await User.findOne({ email });
+			if (existingUser) {
+			return res.status(409).json({ 
+				success: false,
+				message: "此 email 已經註冊過，請直接登入" 
+			});
+		}
+
         const newUser = await User.create({
 			name,
 			email,
@@ -49,12 +57,12 @@ export const signup = async(req, res) => {
 			sameSite: "strict", // 預防 CSRF 攻擊
 			secure: process.env.NODE_ENV === "prod",
 		});
-        res.status(201).json({
+        res.status(200).json({
 			success: true,
 			user: newUser,
 		});
 
-    } catch(err){
+    } catch (err){
         console.log(err);
 		
 		res.status(500).json({ success: false, message: "Server error" });
@@ -94,7 +102,7 @@ export const login = async(req, res) => {
 			user,
 		});
 
-    } catch(err){
+    } catch (err){
         console.log(err);
 
 		res.status(500).json({ success: false, message: "Server error" });

@@ -26,10 +26,10 @@ export const protectRoute = async (req, res, next) => {
 		req.user = currentUser;
 
         next();
-    } catch(err){
+    } catch (err){
         console.log(err);
        
-        if (error instanceof jwt.JsonWebTokenError) {
+        if (err instanceof jwt.JsonWebTokenError) {
 			return res.status(401).json({
 				success: false,
 				message: "無權限，無效 token",
