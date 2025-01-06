@@ -59,6 +59,7 @@ export const useAuthStore = create((set) => ({
 			//toast.error(err || "Something went wrong");
 		}
 	},
+	setAuthUser: (user) => set({ authUser: user }),
 	checkAuth: async() => {
 		try {
 			const res = await fetchInstance('/auth/me')
@@ -72,5 +73,4 @@ export const useAuthStore = create((set) => ({
 			set({ checkingAuth: null });
 		}
 	},
-	setAuthUser: (user) => set({ authUser: user }),
 }));

@@ -4,13 +4,11 @@ import { getUserProfiles, likeUser, dislikeUser, getMatches } from "../controlle
 
 const router = express.Router();
 
-router.use(protectRoute);
+router.get("/user-profiles", protectRoute, getUserProfiles);
 
-router.get("/user-profiles", getUserProfiles);
-
-router.post("/like/:userId", likeUser);
-router.post("/dislike/:userId", dislikeUser);
+router.post("/like/:userId", protectRoute, likeUser);
+router.post("/dislike/:userId", protectRoute, dislikeUser);
 
 
-router.get("/", getMatches);
+router.get("/", protectRoute, getMatches);
 export default router;

@@ -125,11 +125,9 @@ const ProfilePage = () => {
 								</div>
 							</div>
 
-							{/* BIO */}
-
 							<div>
 								<label htmlFor='bio' className='block text-sm font-medium text-gray-700'>
-									Bio
+									自我介紹
 								</label>
 								<div className='mt-1'>
 									<textarea
@@ -142,16 +140,15 @@ const ProfilePage = () => {
 									/>
 								</div>
 							</div>
-
 							<div>
-								<label className='block text-sm font-medium text-gray-700'>Cover Image</label>
+								<label className='block text-sm font-medium text-gray-700'>大頭照</label>
 								<div className='mt-1 flex items-center'>
 									<button
 										type='button'
 										onClick={() => fileInputRef.current.click()}
 										className='inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500'
 									>
-										Upload Image
+										上傳照片
 									</button>
 									<input
 										ref={fileInputRef}
