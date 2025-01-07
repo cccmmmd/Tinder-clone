@@ -70,7 +70,7 @@ const generateBio = () => {
 
 const generateRandomUser = (gender, index) => {
 	const names = gender === "male" ? mNames : fNames;
-    const age = Math.floor(Math.random() * (50 - 18 + 1) + 18);
+    const age = Math.floor(Math.random() * (40 - 18 + 1) + 18);
 	const name = names[index];
     const randomStr = () => {
         return Array(3)

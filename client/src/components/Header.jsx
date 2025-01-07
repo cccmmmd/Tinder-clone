@@ -29,7 +29,7 @@ const Header = () => {
 	}, []);
 
     return (
-		<header className='bg-gradient-to-r from-sky-500 via-sky-600 to-sky-700 shadow-lg'>
+		<header className='bg-gradient-to-r from-purple-600 to-rose-400 shadow-lg'>
 			<div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
 				<div className='flex justify-between items-center py-4'>
 					<div className='flex items-center'>
@@ -80,14 +80,14 @@ const Header = () => {
 							<>
 								<Link
 									to='/auth'
-									className='text-white hover:text-sky-200 transition duration-150 ease-in-out'
+									className='text-white hover:text-rose-200 transition duration-150 ease-in-out'
 								>
 									登入
 								</Link>
 								<Link
 									to='/auth'
-									className='bg-white text-sky-600 px-4 py-2 rounded-full font-medium
-                   hover:bg-sky-100 transition duration-150 ease-in-out'
+									className='bg-white text-rose-600 px-4 py-2 rounded-full font-medium
+                   hover:bg-rose-100 transition duration-150 ease-in-out'
 								>
 									註冊
 								</Link>
@@ -109,13 +109,13 @@ const Header = () => {
 			{/* 手機 menu */}
 
 			{mobileMenuOpen && (
-				<div className='md:hidden bg-sky-600'>
+				<div className='md:hidden bg-rose-500'>
 					<div className='px-2 pt-2 pb-3 space-y-1 sm:px-3'>
 						{authUser ? (
 							<>
 								<Link
 									to='/profile'
-									className='block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-sky-700'
+									className='block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-rose-700'
 									onClick={() => setMobileMenuOpen(false)}
 								>
 									個人檔案
@@ -125,7 +125,7 @@ const Header = () => {
 										logout();
 										setMobileMenuOpen(false);
 									}}
-									className='block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-sky-700'
+									className='block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-rose-700'
 								>
 									登出
 								</button>
@@ -134,14 +134,14 @@ const Header = () => {
 							<>
 								<Link
 									to='/auth'
-									className='block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-sky-700'
+									className='block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-rose-700'
 									onClick={() => setMobileMenuOpen(false)}
 								>
 									登入
 								</Link>
 								<Link
 									to='/auth'
-									className='block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-sky-700'
+									className='block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-rose-700'
 									onClick={() => setMobileMenuOpen(false)}
 								>
 									註冊

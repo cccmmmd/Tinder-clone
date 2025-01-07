@@ -69,7 +69,7 @@ const ProfilePage = () => {
 										value={name}
 										onChange={(e) => setName(e.target.value)}
 										className='appearance-none block w-full px-3 py-2 border border-gray-300
-										 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-sky-500 focus:border-sky-500 
+										 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-rose-500 focus:border-rose-500 
 										sm:text-sm'
 									/>
 								</div>
@@ -86,7 +86,7 @@ const ProfilePage = () => {
 										required
 										value={age}
 										onChange={(e) => setAge(e.target.value)}
-										className='appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-sky-500 focus:border-sky-500 sm:text-sm'
+										className='appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-rose-500 focus:border-rose-500 sm:text-sm'
 									/>
 								</div>
 							</div>
@@ -97,7 +97,7 @@ const ProfilePage = () => {
 										<label key={option} className='inline-flex items-center'>
 											<input
 												type='radio'
-												className='form-radio text-sky-600'
+												className='form-radio text-rose-600'
 												name='gender'
 												value={option.toLowerCase()}
 												checked={gender === option.toLowerCase()}
@@ -115,7 +115,7 @@ const ProfilePage = () => {
 										<label key={option} className='inline-flex items-center'>
 											<input
 												type='checkbox'
-												className='form-checkbox text-sky-600'
+												className='form-checkbox text-rose-600'
 												checked={genderPreference.toLowerCase() === option.toLowerCase()}
 												onChange={() => setGenderPreference(option.toLowerCase())}
 											/>
@@ -136,7 +136,7 @@ const ProfilePage = () => {
 										rows={3}
 										value={bio}
 										onChange={(e) => setBio(e.target.value)}
-										className='appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-sky-500 focus:border-sky-500 sm:text-sm'
+										className='appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-rose-500 focus:border-rose-500 sm:text-sm'
 									/>
 								</div>
 							</div>
@@ -146,7 +146,7 @@ const ProfilePage = () => {
 									<button
 										type='button'
 										onClick={() => fileInputRef.current.click()}
-										className='inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500'
+										className='inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500'
 									>
 										上傳照片
 									</button>
@@ -168,8 +168,8 @@ const ProfilePage = () => {
 
 							<button
 								type='submit'
-								className='w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-sky-600 hover:bg-sky-700 
-								focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500'
+								className='w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-rose-500 hover:bg-rose-700 
+								focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500'
 								disabled={loading}
 							>
 								{loading ? "Saving..." : "Save"}

@@ -9,7 +9,7 @@ const AuthPage = () => {
     return (
         <div
             className='min-h-screen flex items-center justify-center bg-gradient-to-br
-        from-purple-600 to-sky-400 p-4
+        from-purple-600 to-rose-400 p-4
     '
         >
             <div className='w-full max-w-md'>
@@ -27,7 +27,7 @@ const AuthPage = () => {
 
                         <button
                             onClick={() => setIsLogin((prevIsLogin) => !prevIsLogin)}
-                            className='mt-2 text-sky-600 hover:text-sky-800 font-medium transition-colors duration-300'
+                            className='mt-2 text-rose-600 hover:text-rose-800 font-medium transition-colors duration-300'
                         >
                             {isLogin ? "建立 Tinder 新帳號" : "登入 Tinder"}
                         </button>

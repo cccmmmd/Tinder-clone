@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { fetchInstance } from "../lib/fetch";
 import toast from "react-hot-toast";
+import { initializeSocket, disconnectSocket } from "../socket/socket_client";
 
 export const useAuthStore = create((set) => ({
 	authUser: null,
@@ -15,7 +16,8 @@ export const useAuthStore = create((set) => ({
 				body: JSON.stringify(data)
 			}).then(res => res.json());
 			if(res.success) {
-				set({authUser: res.user})
+				set({authUser: res.user});
+				initializeSocket(res.user._id);
 				toast.success("帳號建立成功！");
 			} else {
 				toast.error(res.message);
@@ -34,7 +36,8 @@ export const useAuthStore = create((set) => ({
 				body: JSON.stringify(data)
 			}).then(res => res.json());
 			if(res.success) {
-				set({authUser: res.user})
+				set({authUser: res.user});
+				initializeSocket(res.user._id);
 				toast.success("成功登入！");
 			} else {
 				toast.error(res.message);
@@ -52,6 +55,7 @@ export const useAuthStore = create((set) => ({
 			}).then(res => res.json());
 			if(res.success) {
 				set({ authUser: null });
+				disconnectSocket();
 				toast.success(res.message);
 			}
 		} catch (err) {
@@ -64,6 +68,7 @@ export const useAuthStore = create((set) => ({
 		try {
 			const res = await fetchInstance('/auth/me')
 			.then(res => res.json());
+			initializeSocket(res.user._id);
 			set({ authUser: res.user });
 		} catch (err) {
 			set({ authUser: null });

@@ -56,6 +56,30 @@ export const likeUser = async (req, res) => {
                 likedUser.matches.push(currentUser.id);
 
                 await Promise.all([await currentUser.save(), await likedUser.save()]); //同時儲存
+				
+				// socket.io
+				const connectedUsers = getConnectedUsers();  //可以查看誰在線上
+				const io = getIO();
+
+				const likedUserSocketId = connectedUsers.get(likedUserId);
+
+				// 配對到的兩人互送資訊
+				if (likedUserSocketId) {
+					io.to(likedUserSocketId).emit("newMatch", {
+						_id: currentUser._id,
+						name: currentUser.name,
+						image: currentUser.image,
+					});
+				}
+
+				const currentSocketId = connectedUsers.get(currentUser._id.toString());
+				if (currentSocketId) {
+					io.to(currentSocketId).emit("newMatch", {
+						_id: likedUser._id,
+						name: likedUser.name,
+						image: likedUser.image,
+					});
+				}
             }
         }
 
