@@ -1,23 +1,26 @@
 import { useState } from "react";
 import { useAuthStore } from "../store/authStore";
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 
 	const { login, loading } = useAuthStore();
+	const navigate = useNavigate();
 
 	return (
 		<form
 			className='space-y-6'
-			onSubmit={(e) => {
+			onSubmit={async (e) => {
 				e.preventDefault();
-				login({ email, password });
+				const success = await login({ email, password });
+				if(success) navigate('/match');
 			}}
 		>
 			<div>
 				<label htmlFor='email' className='block text-sm font-medium text-gray-700'>
-					Email address
+					Email
 				</label>
 				<div className='mt-1'>
 					<input
@@ -57,11 +60,11 @@ const LoginForm = () => {
 					rounded-md shadow-sm text-sm font-medium text-white ${
 						loading
 							? "bg-rose-400 cursor-not-allowed"
-							: "bg-rose-500 hover:bg-rose-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500"
+							: "bg-rose-400 hover:bg-rose-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500"
 					}`}
 				disabled={loading}
 			>
-				{loading ? "登入中." : "登入"}
+				{loading ? "登入中" : "登入"}
 			</button>
 		</form>
 	);

@@ -17,7 +17,7 @@ export const useUserStore = create((set) => ({
 			useAuthStore.getState().setAuthUser(res.user);
 			toast.success("個人檔案已成功更新");
             setTimeout(() => {
-                window.location.href = '/'; // 或使用 navigate('/')
+                window.location.href = '/match'; 
             }, 2000);
 		} catch (err) {
 			toast.error(err || "Something went wrong");

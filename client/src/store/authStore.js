@@ -19,11 +19,14 @@ export const useAuthStore = create((set) => ({
 				set({authUser: res.user});
 				initializeSocket(res.user._id);
 				toast.success("帳號建立成功！");
+				return true; 
 			} else {
 				toast.error(res.message);
+				return false;
 			}
 		} catch (err) {
 			toast.error(err || "Something went wrong");
+			return false;
 		} finally {
 			set({loading: false});
 		}
@@ -38,12 +41,15 @@ export const useAuthStore = create((set) => ({
 			if(res.success) {
 				set({authUser: res.user});
 				initializeSocket(res.user._id);
-				toast.success("成功登入！");
+				toast.success("登入成功！");
+				return true;
 			} else {
 				toast.error(res.message);
+				return false;
 			}
 		} catch (err) {
 			toast.error(err || "Something went wrong");
+			return false;
 		} finally {
 			set({loading: false});
 		}

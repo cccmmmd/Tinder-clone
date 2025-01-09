@@ -8,7 +8,7 @@ const Sidebar = () => {
 
 	const toggleSidebar = () => setIsOpen(!isOpen);
 
-	const { matches, isLoadingMyMatches, getMatches } = useMatchStore();
+	const { matches, loadingMatches, getMatches } = useMatchStore();
 	
 
 	useEffect(() => {
@@ -36,7 +36,7 @@ const Sidebar = () => {
 					</div>
 
 					<div className='flex-grow overflow-y-auto p-4 z-10 relative'>
-						{isLoadingMyMatches ? (
+						{loadingMatches ? (
 							<div className='flex flex-col items-center justify-center h-full text-center'>
 								<Loader className='text-rose-500 mb-4 animate-spin' size={48} />
 								<h3 className='text-xl font-semibold text-gray-700 mb-2'>載入中</h3>
