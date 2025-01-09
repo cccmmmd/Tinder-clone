@@ -52,7 +52,7 @@ const Header = () => {
                                         className='h-10 w-10 object-cover rounded-full border-2 border-white'
                                         alt='User image'
                                         />
-                                        : <CircleUserRound className='text-white text-4xl' />
+                                        : <CircleUserRound className='text-white' />
                                     }
 									<span className='text-white font-medium'>{authUser.name}</span>
 								</button>
@@ -109,13 +109,13 @@ const Header = () => {
 			{/* 手機 menu */}
 
 			{mobileMenuOpen && (
-				<div className='md:hidden bg-rose-500'>
+				<div className='md:hidden bg-rose-400 z-10 absolute w-full'>
 					<div className='px-2 pt-2 pb-3 space-y-1 sm:px-3'>
 						{authUser ? (
 							<>
 								<Link
 									to='/profile'
-									className='block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-rose-700'
+									className='block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-rose-500 text-center'
 									onClick={() => setMobileMenuOpen(false)}
 								>
 									個人檔案
@@ -125,7 +125,7 @@ const Header = () => {
 										logout();
 										setMobileMenuOpen(false);
 									}}
-									className='block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-rose-700'
+									className='block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-rose-500 text-center'
 								>
 									登出
 								</button>
@@ -134,14 +134,14 @@ const Header = () => {
 							<>
 								<Link
 									to='/auth'
-									className='block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-rose-700'
+									className='block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-rose-500'
 									onClick={() => setMobileMenuOpen(false)}
 								>
 									登入
 								</Link>
 								<Link
 									to='/auth'
-									className='block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-rose-700'
+									className='block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-rose-500'
 									onClick={() => setMobileMenuOpen(false)}
 								>
 									註冊

@@ -17,7 +17,7 @@ export const protectRoute = async (req, res, next) => {
 		if (!decoded) {
 			return res.status(401).json({
 				success: false,
-				message: "無權限，無效 token",
+				message: "未被認證，無效 token",
 			});
 		}
 
@@ -32,7 +32,7 @@ export const protectRoute = async (req, res, next) => {
         if (err instanceof jwt.JsonWebTokenError) {
 			return res.status(401).json({
 				success: false,
-				message: "無權限，無效 token",
+				message: "未被認證，無效 token",
 			});
 		} else {
 			return res.status(500).json({

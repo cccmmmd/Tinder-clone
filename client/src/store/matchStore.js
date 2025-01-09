@@ -6,15 +6,14 @@ import { getSocket } from "../socket/socket_client";
 
 export const useMatchStore = create((set) => ({
     matches: [],
-    loading: false,
     userProfiles: [],
-    myMatchesLoading: false,
-	userProfilesLoading: false,
+    loadingMatches: false,
+	loadingUserProfiles: false,
 	swipeState: null,
 
 	getMatches: async () => {
 		try {
-			set({ myMatchesLoading: true });
+			set({ loadingMatches: true });
             const res = await fetchInstance("/matches")
 			.then(res => res.json());
 			set({ matches: res.matches });
@@ -22,13 +21,13 @@ export const useMatchStore = create((set) => ({
 			set({ matches: [] });
 			toast.error(err || "Something went wrong");
 		} finally {
-			set({ myMatchesLoading: false });
+			set({ loadingMatches: false });
 		}
 	},
 
     getUserProfiles: async () => {
 		try {
-			set({ userProfilesLoading: true });
+			set({ loadingUserProfiles: true });
             const res = await fetchInstance("/matches/user-profiles")
 			.then(res => res.json());
 			set({ userProfiles: res.users });
@@ -36,7 +35,7 @@ export const useMatchStore = create((set) => ({
 			set({ userProfiles: [] });
 			toast.error(err || "Something went wrong");
 		} finally {
-			set({ userProfilesLoading: false });
+			set({ loadingUserProfiles: false });
 		}
 	},
 	likeProfile: async (user) => {
@@ -74,7 +73,7 @@ export const useMatchStore = create((set) => ({
 				set((state) => ({
 					matches: [...state.matches, newMatch],
 				}));
-				toast.success("恭喜你！你們配對了！");
+				toast.success("速報！你有一個新配對！");
 			});
 		} catch (error) {
 			console.log(error);

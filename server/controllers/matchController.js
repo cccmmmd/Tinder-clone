@@ -1,4 +1,5 @@
 import User from "../models/User.js";
+import { getConnectedUsers, getIO } from "../socket/socket_server.js";
 
 export const getUserProfiles = async (req, res) => {
 	try {
@@ -61,7 +62,7 @@ export const likeUser = async (req, res) => {
 				const connectedUsers = getConnectedUsers();  //可以查看誰在線上
 				const io = getIO();
 
-				const likedUserSocketId = connectedUsers.get(likedUserId);
+				const likedUserSocketId = connectedUsers.get(userId);
 
 				// 配對到的兩人互送資訊
 				if (likedUserSocketId) {

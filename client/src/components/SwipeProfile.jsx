@@ -33,7 +33,7 @@ const SwipeProfile = () => {
 								alt={user.name}
 								className='rounded-lg object-cover h-full w-full pointer-events-none'
 							/>
-							: <CircleUserRound className='text-white text-4xl' />
+							: <CircleUserRound size={190} className='text-rose-300' />
 							}
 						</figure>
 						<div className='card-body bg-gradient-to-b from-white to-pink-50'>

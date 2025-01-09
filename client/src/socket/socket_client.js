@@ -1,7 +1,7 @@
 import io from "socket.io-client";
 
 // 根據環境決定連接位址
-const SOCKET_URL = import.meta.env.MODE === "dev" ? "http://localhost:3000" : "/";
+const SOCKET_URL = import.meta.env.MODE === "development" ? "http://localhost:3000" : "/";
 
 // 初始化連接變數
 let socket = null;

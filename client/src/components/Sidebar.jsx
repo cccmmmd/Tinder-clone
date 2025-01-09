@@ -8,13 +8,13 @@ const Sidebar = () => {
 
 	const toggleSidebar = () => setIsOpen(!isOpen);
 
-	const {  isLoadingMyMatches, getMatches } = useMatchStore();
+	const { matches, isLoadingMyMatches, getMatches } = useMatchStore();
 	
 
 	useEffect(() => {
 		getMatches();
 	}, [getMatches]);
-	const matches = [];
+	
 	return (
 		<>
 			<div className={`fixed inset-y-0 left-0 z-20 w-64 bg-white shadow-md overflow-hidden transition-transform duration-300
@@ -26,7 +26,7 @@ const Sidebar = () => {
 				<div className='flex flex-col h-full'>
 					{/* Header */}
 					<div className='p-4 pb-[27px] border-b border-rose-200 flex justify-between items-center'>
-						<h2 className='text-xl font-bold text-rose-600'>你的配對</h2>
+						<h2 className='text-xl font-bold text-purple-600'>你的配對</h2>
 						<button
 							className='lg:hidden p-1 text-gray-500 hover:text-gray-700 focus:outline-none'
 							onClick={toggleSidebar}
@@ -54,15 +54,17 @@ const Sidebar = () => {
 							matches && matches.map((match) => (
 								<Link key={match._id} to={`/chat/${match._id}`}>
 									<div className='flex items-center mb-4 cursor-pointer hover:bg-rose-50 p-2 rounded-lg transition-colors duration-300'>
-										match.image? 
+									{ match.image ? (
 										<img
-											src={match.image}
-											alt='User avatar'
-											className='size-12 object-cover rounded-full mr-3 border-2 border-rose-300'
+										src={match.image}
+										alt='User avatar'
+										className='size-12 object-cover rounded-full mr-3 border-2 border-rose-300'
 										/>
-										: <CircleUserRound className='text-white text-4xl' />
-
-										<h3 className='font-semibold text-gray-800'>{match.name}</h3>
+										) : (
+											<CircleUserRound className='text-black mr-2' />
+										)
+									}
+									<h3 className='font-semibold text-gray-800'>{match.name}</h3>
 									</div>
 								</Link>
 							))
