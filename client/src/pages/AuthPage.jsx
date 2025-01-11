@@ -1,12 +1,41 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { HandHeart } from "lucide-react";
+import { useAuthStore } from "../store/authStore";
 
 import LoginForm from "../components/LoginForm";
 import SignUpForm from "../components/SignUpForm";
 
 const AuthPage = () => {
     const [isLogin, setIsLogin] = useState(true);
+    const { setAuthUserSocket } = useAuthStore();
+    
+    const handleFacebookLogin = async () => {
+		// 使用 popup 視窗處理 OAuth
+		const popup = window.open(
+		  'http://localhost:3000/api/auth/facebook',
+		  'facebook-login',
+		  'width=600,height=600'
+		);
+	
+		// 監聽來自 popup 的訊息
+		const handleMessage = (event) => {
+			// 確保訊息來源安全
+			if (event.origin !== 'http://localhost:3000') return;
+	  
+			if (event.data.type === 'AUTH_SUCCESS') {
+			  // 更新用戶狀態
+			  const { user } = event.data;
+			  setAuthUserSocket(user);
+			  
+			  // 清理
+			  window.removeEventListener('message', handleMessage);
+			  popup.close();
+			}
+		  };
+	  
+		  window.addEventListener('message', handleMessage);
+	};
 
     return (
         <div
@@ -25,8 +54,16 @@ const AuthPage = () => {
                 </h2>
 
                 <div className='bg-white shadow-xl rounded-lg p-8'>
-                    {isLogin ? <LoginForm /> : <SignUpForm />}
-
+                    {isLogin ? <LoginForm /> : <SignUpForm />}   
+                    <br/>
+                    <button
+                        type='submit'
+                        className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white 
+                        bg-blue-800 hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                        onClick={() => {handleFacebookLogin();
+                    }}>
+                        用 facebook 註冊 / 登入
+                    </button> 
                     <div className='mt-8 text-center'>
                         <p className='text-sm text-gray-600'>
                             {isLogin ? "新朋友？" : "已經有 Tinder 帳戶了？"}

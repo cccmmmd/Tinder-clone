@@ -70,6 +70,10 @@ export const useAuthStore = create((set) => ({
 		}
 	},
 	setAuthUser: (user) => set({ authUser: user }),
+	setAuthUserSocket: (user) => {
+		set({ authUser: user });
+		initializeSocket(user._id);
+	  },
 	checkAuth: async() => {
 		try {
 			const res = await fetchInstance('/auth/me')

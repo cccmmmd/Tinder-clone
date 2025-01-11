@@ -22,7 +22,7 @@ export const useMessageStore = create((set) => ({
 				method: 'POST',
 				body: JSON.stringify( { receiverId, message })
 			}).then(res => res.json());
-			console.log("message sent", res);
+			// console.log("message sent", res);
 		} catch (err) {
 			toast.error(err || "Something went wrong");
 		}
