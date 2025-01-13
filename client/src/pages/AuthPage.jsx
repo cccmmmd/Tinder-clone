@@ -96,8 +96,8 @@ const AuthPage = () => {
                 </div>
             </div>
             <div className="fixed right-6 top-4 text-white font-medium">
-                <button onClick={() => changeLng("en")}>EN</button>&nbsp;&#47;&nbsp;
-                <button onClick={() => changeLng("zh")}>繁中</button>
+                <button className="hover:text-purple-700" onClick={() => changeLng("en")}>EN</button>&nbsp;&#47;&nbsp;
+                <button className="hover:text-purple-700" onClick={() => changeLng("zh")}>繁中</button>
             </div>
         </div>
     );

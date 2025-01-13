@@ -54,7 +54,9 @@
     "profile": {
         "bio": "About Me",
         "pic": "Profile Picture",
-        "upload_pic": "Upload Photo"
+        "upload_pic": "Upload Photo",
+        "saving": "Saving",
+        "save": "Save"
     },
     "chat": {
         "go_home": "Back to Home",

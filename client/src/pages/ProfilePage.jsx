@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import Header from "../components/Header";
 import { useAuthStore } from "../store/authStore";
 import { useUserStore } from "../store/userStore";
+import { useTranslation } from "react-i18next";
 
 const ProfilePage = () => {
 	const { authUser } = useAuthStore();
@@ -11,14 +12,16 @@ const ProfilePage = () => {
 	const [gender, setGender] = useState(authUser.gender || "");
 	const [genderPreference, setGenderPreference] = useState(authUser.genderPreference || []);
 	const [image, setImage] = useState(authUser.image || null);
+	const { t } = useTranslation();
+
   const Gender = {
-    "Male": "男性",
-    "Female": "女性", 
+    "Male": t("auth.male"),
+    "Female": t("auth.female"), 
    };
   const genderOptions = {
-    "Male": "男性",
-    "Female": "女性", 
-    "Both": "都可"
+    "Male": t("auth.male"),
+    "Female": t("auth.female"), 
+    "Both": t("auth.both")
    };
 
 	const fileInputRef = useRef(null);
@@ -48,7 +51,7 @@ const ProfilePage = () => {
 
 			<div className='flex-grow flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8'>
 				<div className='sm:mx-auto sm:w-full sm:max-w-md'>
-					<h2 className='mt-6 text-center text-3xl font-extrabold text-gray-900'>個人檔案</h2>
+					<h2 className='mt-6 text-center text-3xl font-extrabold text-gray-900'>{t("nav.profile")}</h2>
 				</div>
 
 				<div className='mt-8 sm:mx-auto sm:w-full sm:max-w-md'>
@@ -57,7 +60,7 @@ const ProfilePage = () => {
 							{/* NAME */}
 							<div>
 								<label htmlFor='name' className='block text-sm font-medium text-gray-700'>
-									姓名
+									{t("auth.name")}
 								</label>
 								<div className='mt-1'>
 									<input
@@ -75,7 +78,7 @@ const ProfilePage = () => {
 							</div>
 							<div>
 								<label htmlFor='age' className='block text-sm font-medium text-gray-700'>
-									年齡
+									{t("auth.age")}
 								</label>
 								<div className='mt-1'>
 									<input
@@ -90,7 +93,7 @@ const ProfilePage = () => {
 								</div>
 							</div>
 							<div>
-								<span className='block text-sm font-medium text-gray-700 mb-2'>性別</span>
+								<span className='block text-sm font-medium text-gray-700 mb-2'>{t("auth.gender")}</span>
 								<div className='flex space-x-4'>
 									{["Male", "Female"].map((option) => (
 										<label key={option} className='inline-flex items-center'>
@@ -108,7 +111,8 @@ const ProfilePage = () => {
 								</div>
 							</div>
 							<div>
-								<span className='block text-sm font-medium text-gray-700 mb-2'>偏好對象</span>
+								<span className='block text-sm font-medium text-gray-700 mb-2'>
+									{t("auth.prefer")}</span>
 								<div className='flex space-x-4'>
 									{["Male", "Female", "Both"].map((option) => (
 										<label key={option} className='inline-flex items-center'>
@@ -126,7 +130,7 @@ const ProfilePage = () => {
 
 							<div>
 								<label htmlFor='bio' className='block text-sm font-medium text-gray-700'>
-									自我介紹
+									{t("profile.bio")}
 								</label>
 								<div className='mt-1'>
 									<textarea
@@ -140,14 +144,16 @@ const ProfilePage = () => {
 								</div>
 							</div>
 							<div>
-								<label className='block text-sm font-medium text-gray-700'>大頭照</label>
+								<label className='block text-sm font-medium text-gray-700'>
+								{t("profile.pic")}
+								</label>
 								<div className='mt-1 flex items-center'>
 									<button
 										type='button'
 										onClick={() => fileInputRef.current.click()}
 										className='inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500'
 									>
-										上傳照片
+										{ t("profile.upload_pic")}
 									</button>
 									<input
 										ref={fileInputRef}
@@ -171,7 +177,7 @@ const ProfilePage = () => {
 								focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500'
 								disabled={loading}
 							>
-								{loading ? "Saving..." : "Save"}
+								{loading ? t("profile.saving") : t("profile.save")}
 							</button>
 						</form>
 					</div>

@@ -54,7 +54,9 @@
     "profile": {
         "bio": "自我介紹",
         "pic": "大頭照",
-        "upload_pic": "上傳照片"
+        "upload_pic": "上傳照片",
+        "saving": "儲存中",
+        "save": "儲存"
     },
     "chat": {
         "go_home": "回首頁",
