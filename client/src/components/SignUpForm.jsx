@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useAuthStore } from "../store/authStore";
+import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const SignUpForm = () => {
 	const [name, setName] = useState("");
@@ -9,20 +11,27 @@ const SignUpForm = () => {
 	const [gender, setGender] = useState("");
 	const [genderPreference, setGenderPreference] = useState("");
 
+	const navigate = useNavigate();
+	const { t } = useTranslation();
 
     const { signup, loading } = useAuthStore();
+
+	const handleSignup = async (e) => {
+		e.preventDefault();
+		const success = await signup({ name, email, password, gender, age, genderPreference });
+		if (success) {
+            navigate('/profile');
+        }
+	}
 
     return (
         <form
 			className='space-y-6'
-			onSubmit={(e) => {
-				e.preventDefault();
-				signup({ name, email, password, gender, age, genderPreference });
-			}}
+			onSubmit={handleSignup}
 		>
 			<div>
 				<label htmlFor='name' className='block text-sm font-medium text-gray-700'>
-					姓名
+					{t("auth.name")}
 				</label>
 				<div className='mt-1'>
 					<input
@@ -57,7 +66,7 @@ const SignUpForm = () => {
 
 			<div>
 				<label htmlFor='password' className='block text-sm font-medium text-gray-700'>
-					密碼
+					Password
 				</label>
 				<div className='mt-1'>
 					<input
@@ -76,7 +85,7 @@ const SignUpForm = () => {
 			{/* AGE */}
 			<div>
 				<label htmlFor='age' className='block text-sm font-medium text-gray-700'>
-					年齡
+					{t("auth.age")}
 				</label>
 				<div className='mt-1'>
 					<input
@@ -93,7 +102,7 @@ const SignUpForm = () => {
 				</div>
 			</div>
 			<div>
-				<label className='block text-sm font-medium text-gray-700'>性別</label>
+				<label className='block text-sm font-medium text-gray-700'>{t("auth.gender")}</label>
 				<div className='mt-2 flex gap-2'>
 					<div className='flex items-center'>
 						<input
@@ -105,7 +114,7 @@ const SignUpForm = () => {
 							className='h-4 w-4 text-rose-600 focus:ring-rose-500 border-gray-300 rounded'
 						/>
 						<label htmlFor='male' className='ml-2 block text-sm text-gray-900'>
-							男性
+							{t("auth.male")}
 						</label>
 					</div>
 					<div className='flex items-center'>
@@ -118,14 +127,14 @@ const SignUpForm = () => {
 							className='h-4 w-4 text-rose-600 focus:ring-rose-500 border-gray-300 rounded'
 						/>
 						<label htmlFor='female' className='ml-2 block text-sm text-gray-900'>
-							女性
+							{t("auth.female")}
 						</label>
 					</div>
 				</div>
 			</div>
 
 			<div>
-				<label className='block text-sm font-medium text-gray-700'>有興趣的對象</label>
+				<label className='block text-sm font-medium text-gray-700'>{t("auth.prefer")}</label>
 				<div className='mt-2 space-y-2'>
 					<div className='flex items-center'>
 						<input
@@ -138,7 +147,7 @@ const SignUpForm = () => {
 							className='h-4 w-4 text-rose-600 focus:ring-rose-500 border-gray-300'
 						/>
 						<label htmlFor='prefer-male' className='ml-2 block text-sm text-gray-900'>
-							男性
+						{t("auth.male")}
 						</label>
 					</div>
 					<div className='flex items-center'>
@@ -152,7 +161,7 @@ const SignUpForm = () => {
 							className='h-4 w-4 text-rose-600 focus:ring-rose-500 border-gray-300'
 						/>
 						<label htmlFor='prefer-female' className='ml-2 block text-sm text-gray-900'>
-							女性
+							{t("auth.female")}
 						</label>
 					</div>
 					<div className='flex items-center'>
@@ -166,12 +175,11 @@ const SignUpForm = () => {
 							className='h-4 w-4 text-rose-600 focus:ring-rose-500 border-gray-300'
 						/>
 						<label htmlFor='prefer-both' className='ml-2 block text-sm text-gray-900'>
-							都可
+							{t("auth.both")}
 						</label>
 					</div>
 				</div>
 			</div>
-
 			<div>
 				<button
 					type='submit'
@@ -182,7 +190,7 @@ const SignUpForm = () => {
 					}`}
 					disabled={loading}
 				>
-					{loading ? "建立中" : "建立"}
+					{loading ? t("auth.creating") : t("auth.create")}
 				</button>
 			</div>
 		</form>

@@ -15,30 +15,34 @@ export const initializeFacebookStrategy = () => {
             profileFields: ['id', 'emails', 'name', 'displayName', 'photos' ],
         },
         async function (accessToken, refreshToken, profile, done) {
-            const user = await User.findOne({
-                email: profile.emails[0].value
-            });
-        
-            if (!user) {
-                console.log('Adding new facebook user to DB..');
-
-                const newUser = await User.create({
-                    name: profile.displayName,
-                    password: '123456',
-                    email: profile.emails[0].value,
-                    facebookId: profile.id,
-                    age: 0, // 設定預設值或從 Facebook 獲取
-                    gender: profile.gender || 'male', // 預設值或從 Facebook 獲取
-                    genderPreference: 'both', // 設定預設值
-                    image: profile.photos?.[0]?.value || ''
+            try {
+                const user = await User.findOne({
+                    email: profile.emails[0].value
                 });
             
-                return done(null, profile);
-            } else {
-                console.log('Facebook User already exist in DB..');
-                return done(null, profile);
-            }
-      }
+                if (!user) {
+                    console.log('Adding new facebook user to DB..');
+    
+                    const newUser = await User.create({
+                        name: profile.displayName,
+                        password: '123456',
+                        email: profile.emails[0].value,
+                        facebookId: profile.id,
+                        age: 18, // 設定預設值或從 Facebook 獲取
+                        gender: profile.gender || 'male', // 預設值或從 Facebook 獲取
+                        genderPreference: 'both', // 設定預設值
+                        image: profile.photos?.[0]?.value || '',
+                    });
+                
+                    return done(null, { ...newUser.toObject(), isNewUser: true});
+                } else {
+                    console.log('Facebook User already exist in DB..');
+                    return done(null, user);
+                }
+            } catch (err) {
+                return done(err, null);
+            }     
+        }
     )
   );
 };

@@ -18,7 +18,7 @@ export const useUserStore = create((set) => ({
 			toast.success("個人檔案已成功更新");
             setTimeout(() => {
                 window.location.href = '/match'; 
-            }, 2000);
+            }, 1000);
 		} catch (err) {
 			toast.error(err || "Something went wrong");
 		} finally {

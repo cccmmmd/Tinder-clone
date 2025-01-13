@@ -43,7 +43,7 @@ app.use(
 );
 
 passport.serializeUser((user, done) => { // 用戶登入成功 → serializeUser 將 ID 存入 session
-	done(null, user.emails[0].value);
+	done(null, user);
 });
   
 passport.deserializeUser(async (user, done) => { // 用戶發送新請求 → deserializeUser 用 ID 查詢用戶資料

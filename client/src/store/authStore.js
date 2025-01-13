@@ -18,7 +18,7 @@ export const useAuthStore = create((set) => ({
 			if(res.success) {
 				set({authUser: res.user});
 				initializeSocket(res.user._id);
-				toast.success("帳號建立成功！");
+				toast.success("帳號建立成功！歡迎補充個人資料");
 				return true; 
 			} else {
 				toast.error(res.message);
@@ -70,9 +70,11 @@ export const useAuthStore = create((set) => ({
 		}
 	},
 	setAuthUser: (user) => set({ authUser: user }),
-	setAuthUserSocket: (user) => {
+	setAuthUserSocket: (user, isNewUser) => {
 		set({ authUser: user });
 		initializeSocket(user._id);
+		toast.success("登入成功！");
+		if(isNewUser) toast.success("初次登入請先確認個人資料");
 	  },
 	checkAuth: async() => {
 		try {

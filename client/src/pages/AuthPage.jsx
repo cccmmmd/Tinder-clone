@@ -1,7 +1,8 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { HandHeart } from "lucide-react";
 import { useAuthStore } from "../store/authStore";
+import { useTranslation } from "react-i18next";
 
 import LoginForm from "../components/LoginForm";
 import SignUpForm from "../components/SignUpForm";
@@ -9,34 +10,51 @@ import SignUpForm from "../components/SignUpForm";
 const AuthPage = () => {
     const [isLogin, setIsLogin] = useState(true);
     const { setAuthUserSocket } = useAuthStore();
+
+    const { t, i18n } = useTranslation();
+    const changeLng = (lng) => {
+        i18n.changeLanguage(lng);
+    };
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        // 監聽來自 popup 的訊息
+        const handleMessage = async(event) => {
+            // 確保訊息來源安全
+            if (event.origin !== 'http://localhost:3000') return;
     
+            if (event.data.type === 'AUTH_SUCCESS') {
+                // 更新用戶狀態
+                const { user } = event.data;
+                const { isNewUser } = event.data;
+
+                await setAuthUserSocket(user, isNewUser);
+                if (event.data.isNewUser) {
+                    navigate('/profile');
+                }
+                
+                // 清理
+                // window.removeEventListener('message', handleMessage);
+                // popup.close();
+            }
+        };
+    
+        window.addEventListener('message', handleMessage);
+        return () => window.removeEventListener('message', handleMessage);
+    }, [navigate, setAuthUserSocket]);
+
     const handleFacebookLogin = async () => {
+        const width = 600;
+        const height = 600;
+        const left = window.screen.width / 2 - width / 2;
+        const top = window.screen.height / 2 - height / 2;
 		// 使用 popup 視窗處理 OAuth
 		const popup = window.open(
 		  'http://localhost:3000/api/auth/facebook',
 		  'facebook-login',
-		  'width=600,height=600'
+		  `width=${width},height=${height},left=${left},top=${top}`
 		);
-	
-		// 監聽來自 popup 的訊息
-		const handleMessage = (event) => {
-			// 確保訊息來源安全
-			if (event.origin !== 'http://localhost:3000') return;
-	  
-			if (event.data.type === 'AUTH_SUCCESS') {
-			  // 更新用戶狀態
-			  const { user } = event.data;
-			  setAuthUserSocket(user);
-			  
-			  // 清理
-			  window.removeEventListener('message', handleMessage);
-			  popup.close();
-			}
-		  };
-	  
-		  window.addEventListener('message', handleMessage);
-	};
-
+    };
     return (
         <div
             className='min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-600 to-rose-400 p-4'>
@@ -50,7 +68,7 @@ const AuthPage = () => {
             </div>
             <div className='w-full max-w-md'>
                 <h2 className='text-center text-3xl font-extrabold text-white mb-8'>
-                    {isLogin ? "登入 Tinder" : "建立 Tinder 新帳號"}
+                    {isLogin ? `${t("auth.login")} Tinder` : t("auth.create_new_account")}
                 </h2>
 
                 <div className='bg-white shadow-xl rounded-lg p-8'>
@@ -62,21 +80,24 @@ const AuthPage = () => {
                         bg-blue-800 hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                         onClick={() => {handleFacebookLogin();
                     }}>
-                        用 facebook 註冊 / 登入
+                        {t("auth.login_facebook")}
                     </button> 
                     <div className='mt-8 text-center'>
                         <p className='text-sm text-gray-600'>
-                            {isLogin ? "新朋友？" : "已經有 Tinder 帳戶了？"}
+                            {isLogin ? t("auth.new_friend") : t("auth.already_have")}
                         </p>
-
                         <button
                             onClick={() => setIsLogin((prevIsLogin) => !prevIsLogin)}
                             className='mt-2 text-rose-400 hover:text-rose-700 font-medium transition-colors duration-300'
                         >
-                            {isLogin ? "建立 Tinder 新帳號" : "登入 Tinder"}
+                            {isLogin ? t("auth.create_new_account") : `${t("auth.login")} Tinder`}
                         </button>
                     </div>
                 </div>
+            </div>
+            <div className="fixed right-6 top-4 text-white font-medium">
+                <button onClick={() => changeLng("en")}>EN</button>&nbsp;&#47;&nbsp;
+                <button onClick={() => changeLng("zh")}>繁中</button>
             </div>
         </div>
     );

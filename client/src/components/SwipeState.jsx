@@ -1,7 +1,16 @@
 import { useMatchStore } from "../store/matchStore";
+import { useTranslation } from "react-i18next";
 
 const SwipeState = () => {
     const {swipeState} = useMatchStore();
+    const { t } = useTranslation();
+
+    const getStateText = (s) => {
+        if (s === "liked") return t("match.like");
+        if (s === "passed") return t("match.pass");
+        if (s === "matched") return t("match.matched");
+        return "";
+    };
 
     return (
         <div className={`absolute top-10 left-0 right-0 text-center text-6xl font-bold z-10
@@ -10,8 +19,6 @@ const SwipeState = () => {
 			{getStateText(swipeState)}
 		</div>
     )
-
-
 }
 
 export default SwipeState;
@@ -23,9 +30,3 @@ const getStateStyle = (s) => {
     return "";
 }
 
-const getStateText = (s) => {
-    if (s === "liked") return "好感";
-    if (s === "passed") return "無感";
-    if (s === "matched") return "配對成功！";
-    return "";
-};

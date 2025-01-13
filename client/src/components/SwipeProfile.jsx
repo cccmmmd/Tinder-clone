@@ -38,7 +38,7 @@ const SwipeProfile = () => {
 						</figure>
 						<div className='card-body bg-gradient-to-b from-white to-pink-50'>
 							<h2 className='card-title text-2xl text-gray-800'>
-								{user.name}, {user.age} 歲
+								{user.name}, {user.age}
 							</h2>
 							<p className='text-gray-600'>{user.bio}</p>
 						</div>
@@ -47,7 +47,6 @@ const SwipeProfile = () => {
 			))}
 		</div>
     )
-
 }
 
 export default SwipeProfile;

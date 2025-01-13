@@ -1,0 +1,67 @@
+{
+    "landing": {
+        "header": "遇見專屬於你的浪漫",
+        "sub_header": "在這裡，每個相遇都是命中注定的美好",
+        "start_btn":"立即開始",
+        "aimatch": "智慧配對",
+        "aimatch_sub": "透過先進演算法，為你找到最適合的對象",
+        "chat": "即時聊天",
+        "chat_sub": "隨時隨地，展開浪漫對話",
+        "safe": "安全防護",
+        "safe_sub": "嚴格的身分驗證，創造安心交友環境",
+        "story": "成功故事",
+        "story_sub": "累積超過萬對配對成功案例",
+        "start_journey": "開始你的浪漫旅程",
+        "join_us": "加入我們，與對的人相遇在對的時刻",
+        "free_reg": "免費註冊"
+    },
+    "auth": {
+        "login": "登入",
+        "logining": "登入中",
+        "login_facebook": "用 facebook 註冊 / 登入",
+        "new_friend": "新朋友？",
+        "create_new_account": "建立 Tinder 新帳號",
+        "name": "姓名",
+        "age": "年齡",
+        "gender": "性別",
+        "male": "男性",
+        "female": "女性",
+        "prefer": "偏好的對象",
+        "both": "都可",
+        "create": "建立",
+        "creating": "建立中",
+        "already_have": "已經有 Tinder 帳戶了？"
+    },
+    "nav": {
+        "reg": "註冊",
+        "profile": "個人檔案",
+        "logout": "登出",
+        "start_match": "配對 Go"
+    },
+    "match": {
+        "your_match": "你的配對",
+        "type_message": "打出心內話...",
+        "swipte_end": "哇～你滑很快喔！",
+        "non_new_profile": "目前暫時沒有新對象，睡個覺再上來吧 ：）",
+        "loading": "載入中",
+        "loading_matches": "正在載入您的美好配對...請稍等...",
+        "no_matches": "尚未有配對",
+        "swipe_more": "多滑幾下，很快就有配對嘍！",
+        "like": "好感",
+        "pass": "無感",
+        "matched": "配對成功！"
+    },
+    "profile": {
+        "bio": "自我介紹",
+        "pic": "大頭照",
+        "upload_pic": "上傳照片"
+    },
+    "chat": {
+        "go_home": "回首頁",
+        "start_talk": "開始跟 {{name}} 對話吧～",
+        "no_matches": "沒有配對",
+        "matches_remove": "Oops! 配對似乎不存在或已移除... QQ",
+        "load_history": "對話紀錄載入中，請稍等...",
+        "share_mind": "打出你的心內話..."
+    }
+}

@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { useAuthStore } from "../store/authStore";
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from "react-i18next";
 
 const LoginForm = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+
+	const { t } = useTranslation();
 
 	const { login, loading } = useAuthStore();
 	const navigate = useNavigate();
@@ -64,7 +67,7 @@ const LoginForm = () => {
 					}`}
 				disabled={loading}
 			>
-				{loading ? "登入中" : "登入"}
+				{loading ? t("auth.logining") : t("auth.login")}
 			</button>
 		</form>
 	);

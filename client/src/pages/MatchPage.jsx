@@ -5,33 +5,43 @@ import Sidebar from "../components/Sidebar";
 import { useAuthStore } from '../store/authStore';
 import { useMatchStore } from '../store/matchStore';
 import { Dog } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 import SwipeProfile from "../components/SwipeProfile";
 import SwipeState from "../components/SwipeState";
 
-
-
 const MatchPage = () => {
-  const { authUser } = useAuthStore();
-  const { getUserProfiles, loadingUserProfiles, userProfiles, subscribeToNewMatches, unsubscribeFromNewMatches } =
-		useMatchStore();
-
-  useEffect(() => {
-    getUserProfiles()
-  }, [getUserProfiles]);
-
-  useEffect(() => {
-	authUser && subscribeToNewMatches();
-
-	return () => {
-		unsubscribeFromNewMatches();
+	const { authUser } = useAuthStore();
+  	const { getUserProfiles, loadingUserProfiles, userProfiles, subscribeToNewMatches, unsubscribeFromNewMatches } = useMatchStore();
+	
+	const { t, i18n } = useTranslation();
+	const changeLng = (lng) => {
+		i18n.changeLanguage(lng);
 	};
-}, [subscribeToNewMatches, unsubscribeFromNewMatches, authUser]);
-  
-  return (
-    <div
-			className='flex flex-col lg:flex-row min-h-screen bg-gradient-to-br from-rose-100 to-purple-100
-		 overflow-hidden'
+	useEffect(() => {
+    	getUserProfiles()
+	}, [getUserProfiles]);
+
+	useEffect(() => {
+		authUser && subscribeToNewMatches();
+
+		return () => {
+			unsubscribeFromNewMatches();
+		};
+	}, [subscribeToNewMatches, unsubscribeFromNewMatches, authUser]);
+	
+	const NoMoreProfiles = () => (
+		<div className='flex flex-col items-center justify-center h-full text-center p-2'>
+			<Dog className='text-rose-400 mb-6' size={80} />
+			<h2 className='text-3xl font-bold text-gray-800 mb-4'>{t("match.swipte_end")}</h2>
+			<p className='text-xl text-gray-600 mb-6'>{t("match.non_new_profile")}</p>
+		</div>
+	);
+
+  	return (
+    	<div
+		className='flex flex-col lg:flex-row min-h-screen bg-gradient-to-br from-rose-100 to-purple-100
+		overflow-hidden'
 		>
 			<Sidebar />
 			<div className='flex-grow flex flex-col overflow-hidden'>
@@ -45,23 +55,13 @@ const MatchPage = () => {
 					)}
 					{loadingUserProfiles && <Loading />}
 					{userProfiles.length === 0 && !loadingUserProfiles && <NoMoreProfiles />}
-
-					
 				</main>
 			</div>
 		</div>
-  )
+  	)
 }
 
 export default MatchPage;
-
-const NoMoreProfiles = () => (
-	<div className='flex flex-col items-center justify-center h-full text-center p-2'>
-		<Dog className='text-rose-400 mb-6' size={80} />
-		<h2 className='text-3xl font-bold text-gray-800 mb-4'>哇～你滑很快喔！</h2>
-		<p className='text-xl text-gray-600 mb-6'>目前暫時沒有新對象，睡個覺再上來吧 ：）</p>
-	</div>
-);
 
 const Loading = () => {
 	return (

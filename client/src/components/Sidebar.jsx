@@ -2,14 +2,13 @@ import { useEffect, useState } from "react";
 import { X, Heart, Loader, MessageCircle, CircleUserRound } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useMatchStore } from "../store/matchStore";
+import { useTranslation } from "react-i18next";
 
 const Sidebar = () => {
 	const [isOpen, setIsOpen] = useState(false);
-
 	const toggleSidebar = () => setIsOpen(!isOpen);
-
 	const { matches, loadingMatches, getMatches } = useMatchStore();
-	
+	const { t } = useTranslation();
 
 	useEffect(() => {
 		getMatches();
@@ -26,7 +25,7 @@ const Sidebar = () => {
 				<div className='flex flex-col h-full'>
 					{/* Header */}
 					<div className='p-4 pb-[27px] border-b border-rose-200 flex justify-between items-center'>
-						<h2 className='text-xl font-bold text-purple-600'>你的配對</h2>
+						<h2 className='text-xl font-bold text-purple-600'>{t("match.your_match")}</h2>
 						<button
 							className='lg:hidden p-1 text-gray-500 hover:text-gray-700 focus:outline-none'
 							onClick={toggleSidebar}
@@ -39,15 +38,15 @@ const Sidebar = () => {
 						{loadingMatches ? (
 							<div className='flex flex-col items-center justify-center h-full text-center'>
 								<Loader className='text-rose-500 mb-4 animate-spin' size={48} />
-								<h3 className='text-xl font-semibold text-gray-700 mb-2'>載入中</h3>
-								<p className='text-gray-500 max-w-xs'>正在載入您的美好配對...請稍等...</p>
+								<h3 className='text-xl font-semibold text-gray-700 mb-2'> {t("match.loading")}</h3>
+								<p className='text-gray-500 max-w-xs'>{t("match.loading_matches")}</p>
 							</div>
 						) : matches && matches.length === 0 ? (
 							<div className='flex flex-col items-center justify-center h-full text-center'>
 								<Heart className='text-rose-400 mb-4' size={48} />
-								<h3 className='text-xl font-semibold text-gray-700 mb-2'>尚未有配對</h3>
+								<h3 className='text-xl font-semibold text-gray-700 mb-2'>{t("match.no_matches")}</h3>
 								<p className='text-gray-500 max-w-xs'>
-									多滑幾下，很快就有配對嘍！
+									{t("match.swipe_more")}
 								</p>
 							</div>
 						) : (

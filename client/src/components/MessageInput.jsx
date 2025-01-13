@@ -2,11 +2,13 @@ import { useEffect, useRef, useState } from "react";
 import { useMessageStore } from "../store/messageStore";
 import { Send, Smile } from "lucide-react";
 import EmojiPicker from "emoji-picker-react";
+import { useTranslation } from "react-i18next";
 
 const MessageInput = ({ id }) => {
 	const [message, setMessage] = useState("");
 	const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 	const emojiPickerRef = useRef(null);
+	const { t } = useTranslation();
 
 	const { sendMessage } = useMessageStore();
 
@@ -47,7 +49,7 @@ const MessageInput = ({ id }) => {
 				onChange={(e) => setMessage(e.target.value)}
 				className='flex-grow p-3 pl-12 rounded-l-lg border-2 border-rose-400 
         focus:outline-none focus:ring-2 focus:ring-rose-300'
-				placeholder='Type a message...'
+				placeholder={t("chat.share_mind")}
 			/>
 
 			<button
