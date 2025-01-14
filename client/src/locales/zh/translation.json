@@ -65,5 +65,10 @@
         "matches_remove": "Oops! 配對似乎不存在或已移除... QQ",
         "load_history": "對話紀錄載入中，請稍等...",
         "share_mind": "打出你的心內話..."
+    },
+    "responses": {
+        "login_success": "登入成功！",
+        "login_failed": "登入失敗",
+        "networkError": "網路錯誤"
     }
 }

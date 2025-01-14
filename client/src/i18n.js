@@ -14,7 +14,7 @@ const resources = {
   },
 };
 
-i18n.use(initReactI18next).init({
+i18n.use(initReactI18next).use(intervalPlural).use(LanguageDetector).init({
   resources,
   lng: "zh",
   fallbackLng: "en",
