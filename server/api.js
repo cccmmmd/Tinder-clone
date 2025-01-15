@@ -21,6 +21,8 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const httpServer = createServer(app);
 
+const __dirname = path.resolve();
+
 initializeSocket(httpServer);
 
 app.use(
@@ -55,6 +57,13 @@ app.use("/api/auth", authRoutes);
 app.use("/api/user", useRoutes);
 app.use("/api/matches", matchRoutes);
 app.use("/api/message", messageRoutes);
+
+if(process.env.NODE_ENV === "prod") {
+	app.use(express.static(path.join(__dirname, "/client/dist")));
+	app.get("*", (req, res) => {
+		res.sendFile(path.resolve(__dirname, "client", "dist", "index.html"));
+	});
+}
 
 httpServer.listen(PORT, () => {
     console.log("Server started at : " + PORT);
