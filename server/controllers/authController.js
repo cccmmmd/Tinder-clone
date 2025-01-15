@@ -55,7 +55,7 @@ export const signup = async(req, res) => {
 			maxAge: 5 * 24 * 60 * 60 * 1000, // 5 天 毫秒
 			httpOnly: true, // 預防 XSS 攻擊
 			sameSite: "strict", // 預防 CSRF 攻擊
-			secure: process.env.NODE_ENV === "prod",
+			secure: process.env.NODE_ENV === "production",
 		});
         res.status(200).json({
 			success: true,
@@ -94,7 +94,7 @@ export const login = async(req, res) => {
 			maxAge: 5 * 24 * 60 * 60 * 1000, // 5 天 毫秒
 			httpOnly: true, // 預防 XSS 攻擊
 			sameSite: "strict", // 預防 CSRF 攻擊
-			secure: process.env.NODE_ENV === "prod",
+			secure: process.env.NODE_ENV === "production",
 		});
 
         res.status(200).json({
