@@ -10,7 +10,7 @@ export const signToken = (id) => {
 
 // 成功登入處理
 export const handleSuccess = async (req, res) => {
-
+	console.log('@@');
 	const user = req.session.passport.user;
 	const token = signToken(user._id);
 
@@ -30,7 +30,7 @@ export const handleSuccess = async (req, res) => {
 				},
 				'${process.env.CLIENT_URL}'
 			);
-			
+			window.close();
 		</script>
 	`);
 	};
@@ -39,7 +39,7 @@ export const handleSuccess = async (req, res) => {
 	export const handleError = (req, res) => {
 	res.send(`
 		<script>
-		
+		window.close();
 		</script>
 	`);
 	};
