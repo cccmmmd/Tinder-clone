@@ -50,7 +50,7 @@ const AuthPage = () => {
         const top = window.screen.height / 2 - height / 2;
 		// 使用 popup 視窗處理 OAuth
 		const popup = window.open(
-		  'http://localhost:3000/api/auth/facebook',
+		  '/api/auth/facebook',
 		  'facebook-login',
 		  `width=${width},height=${height},left=${left},top=${top}`
 		);
