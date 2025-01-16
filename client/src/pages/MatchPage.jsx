@@ -14,10 +14,8 @@ const MatchPage = () => {
 	const { authUser } = useAuthStore();
   	const { getUserProfiles, loadingUserProfiles, userProfiles, subscribeToNewMatches, unsubscribeFromNewMatches } = useMatchStore();
 	
-	const { t, i18n } = useTranslation();
-	const changeLng = (lng) => {
-		i18n.changeLanguage(lng);
-	};
+	const { t } = useTranslation();
+
 	useEffect(() => {
     	getUserProfiles()
 	}, [getUserProfiles]);
@@ -30,14 +28,6 @@ const MatchPage = () => {
 		};
 	}, [subscribeToNewMatches, unsubscribeFromNewMatches, authUser]);
 	
-	const NoMoreProfiles = () => (
-		<div className='flex flex-col items-center justify-center h-full text-center p-2'>
-			<Dog className='text-rose-400 mb-6' size={80} />
-			<h2 className='text-3xl font-bold text-gray-800 mb-4'>{t("match.swipte_end")}</h2>
-			<p className='text-xl text-gray-600 mb-6'>{t("match.non_new_profile")}</p>
-		</div>
-	);
-
   	return (
     	<div
 		className='flex flex-col lg:flex-row min-h-screen bg-gradient-to-br from-rose-100 to-purple-100
@@ -54,7 +44,7 @@ const MatchPage = () => {
 						</>
 					)}
 					{loadingUserProfiles && <Loading />}
-					{userProfiles.length === 0 && !loadingUserProfiles && <NoMoreProfiles />}
+					{userProfiles.length === 0 && !loadingUserProfiles && <NoMoreProfiles t={t} />}
 				</main>
 			</div>
 		</div>
@@ -62,6 +52,15 @@ const MatchPage = () => {
 }
 
 export default MatchPage;
+
+const NoMoreProfiles = ({ t }) => (
+	<div className='flex flex-col items-center justify-center h-full text-center p-2'>
+		<Dog className='text-rose-400 mb-6' size={80} />
+		<h2 className='text-3xl font-bold text-gray-800 mb-4'>{t("match.swipte_end")}</h2>
+		<p className='text-xl text-gray-600 mb-6'>{t("match.non_new_profile")}</p>
+	</div>
+);
+
 
 const Loading = () => {
 	return (

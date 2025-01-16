@@ -8,6 +8,7 @@ import { Link, useParams } from "react-router-dom";
 import MessageInput from "../components/MessageInput";
 import { useTranslation } from "react-i18next";
 
+
 const ChatPage = () => {
 	const { getMatches, matches, loadingMatches } = useMatchStore();
 	const {
@@ -40,52 +41,9 @@ const ChatPage = () => {
 		id,
 	]);
 
-	const MatchNotFound = () => (
-		<div className="h-screen flex flex-col items-center justify-center bg-gray-100 bg-opacity-50 bg-dot-pattern">
-		<div className="bg-white p-8 rounded-lg shadow-md text-center">
-			<UserX size={64} className="mx-auto text-rose-400 mb-4" />
-			<h2 className="text-2xl font-semibold text-gray-800 mb-2">
-			{t("chat.no_matches")}
-			</h2>
-			<p className="text-gray-600">{t("chat.matches_remove")}</p>
-			<Link
-			to="/"
-			className="mt-6 px-4 py-2 bg-rose-400 text-white rounded hover:bg-rose-600 transition-colors 
-						focus:outline-none focus:ring-2 focus:ring-rose-300 inline-block"
-			>
-			{t("chat.go_home")}
-			</Link>
-		</div>
-		</div>
-	);
 
-	const Loading = () => (
-		<div className="h-screen flex flex-col items-center justify-center bg-gray-100 bg-opacity-50">
-		<div className="bg-white p-8 rounded-lg shadow-md text-center">
-			<Loader size={48} className="mx-auto text-rose-400 animate-spin mb-4" />
-			<h2 className="text-2xl font-semibold text-gray-800 mb-2">
-				{t("match.loading")}
-			</h2>
-			<p className="text-gray-600">{t("chat.load_history")}</p>
-			<div className="mt-6 flex justify-center space-x-2">
-			<div
-				className="w-3 h-3 bg-rose-400 rounded-full animate-bounce"
-				style={{ animationDelay: "0s" }}
-			></div>
-			<div
-				className="w-3 h-3 bg-rose-400 rounded-full animate-bounce"
-				style={{ animationDelay: "0.2s" }}
-			></div>
-			<div
-				className="w-3 h-3 bg-rose-400 rounded-full animate-bounce"
-				style={{ animationDelay: "0.4s" }}
-			></div>
-			</div>
-		</div>
-		</div>
-  	);
-	if (loadingMatches) return <Loading />;
-	if (!match) return <MatchNotFound />;
+	if (loadingMatches) return <Loading t={t}/>;
+	if (!match) return <MatchNotFound t={t}/>;
 	return (
 		<div className="flex flex-col h-screen bg-gray-100 bg-opacity-50">
 		<Header />
@@ -134,3 +92,48 @@ const ChatPage = () => {
 };
 
 export default ChatPage;
+
+const MatchNotFound = ({ t }) => (
+	<div className="h-screen flex flex-col items-center justify-center bg-gray-100 bg-opacity-50 bg-dot-pattern">
+	<div className="bg-white p-8 rounded-lg shadow-md text-center">
+		<UserX size={64} className="mx-auto text-rose-400 mb-4" />
+		<h2 className="text-2xl font-semibold text-gray-800 mb-2">
+		{t("chat.no_matches")}
+		</h2>
+		<p className="text-gray-600">{t("chat.matches_remove")}</p>
+		<Link
+		to="/"
+		className="mt-6 px-4 py-2 bg-rose-400 text-white rounded hover:bg-rose-600 transition-colors 
+					focus:outline-none focus:ring-2 focus:ring-rose-300 inline-block"
+		>
+		{t("chat.go_home")}
+		</Link>
+	</div>
+	</div>
+);
+
+const Loading = ({ t }) => (
+	<div className="h-screen flex flex-col items-center justify-center bg-gray-100 bg-opacity-50">
+	<div className="bg-white p-8 rounded-lg shadow-md text-center">
+		<Loader size={48} className="mx-auto text-rose-400 animate-spin mb-4" />
+		<h2 className="text-2xl font-semibold text-gray-800 mb-2">
+			{t("match.loading")}
+		</h2>
+		<p className="text-gray-600">{t("chat.load_history")}</p>
+		<div className="mt-6 flex justify-center space-x-2">
+		<div
+			className="w-3 h-3 bg-rose-400 rounded-full animate-bounce"
+			style={{ animationDelay: "0s" }}
+		></div>
+		<div
+			className="w-3 h-3 bg-rose-400 rounded-full animate-bounce"
+			style={{ animationDelay: "0.2s" }}
+		></div>
+		<div
+			className="w-3 h-3 bg-rose-400 rounded-full animate-bounce"
+			style={{ animationDelay: "0.4s" }}
+		></div>
+		</div>
+	</div>
+	</div>
+  );
