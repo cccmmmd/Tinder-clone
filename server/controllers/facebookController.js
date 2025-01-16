@@ -10,7 +10,6 @@ export const signToken = (id) => {
 
 // 成功登入處理
 export const handleSuccess = async (req, res) => {
-	console.log('@@');
 	const user = req.session.passport.user;
 	const token = signToken(user._id);
 

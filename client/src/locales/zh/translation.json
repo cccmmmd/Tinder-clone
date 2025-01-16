@@ -69,6 +69,8 @@
     "responses": {
         "login_success": "登入成功！",
         "login_failed": "登入失敗",
-        "networkError": "網路錯誤"
+        "networkError": "網路錯誤",
+        "account_create_success": "帳號建立成功！歡迎補充個人資料",
+        "first_login_profile": "初次登入請先確認個人資料"
     }
 }

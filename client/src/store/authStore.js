@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { fetchInstance } from "../lib/fetch";
 import toast from "react-hot-toast";
 import { initializeSocket, disconnectSocket } from "../socket/socket_client";
+import i18next from 'i18next';
 
 export const useAuthStore = create((set) => ({
 	authUser: null,
@@ -18,7 +19,7 @@ export const useAuthStore = create((set) => ({
 			if(res.success) {
 				set({authUser: res.user});
 				initializeSocket(res.user._id);
-				toast.success("帳號建立成功！歡迎補充個人資料");
+				toast.success(i18next.t('responses.account_create_success'));
 				return true; 
 			} else {
 				toast.error(res.message);
@@ -41,7 +42,7 @@ export const useAuthStore = create((set) => ({
 			if(res.success) {
 				set({authUser: res.user});
 				initializeSocket(res.user._id);
-				toast.success("登入成功！");
+				toast.success(i18next.t('responses.login_success'));
 				return true;
 			} else {
 				toast.error(res.message);
@@ -74,7 +75,7 @@ export const useAuthStore = create((set) => ({
 		set({ authUser: user });
 		initializeSocket(user._id);
 		toast.success("登入成功！");
-		if(isNewUser) toast.success("初次登入請先確認個人資料");
+		if(isNewUser) toast.success(i18next.t('responses.first_login_profile'));
 	  },
 	checkAuth: async() => {
 		try {
