@@ -61,7 +61,9 @@ const userSchema = new mongoose.Schema(
 
 //密碼加密存資料庫
 userSchema.pre("save", async function (next) {  
-	this.password = await bcrypt.hash(this.password, 10);
+    if (this.isModified("password")) {
+	    this.password = await bcrypt.hash(this.password, 10);
+    }
 	next();
 });
 
